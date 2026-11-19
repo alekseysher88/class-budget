@@ -1,13 +1,163 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Админка — Бюджет 5 «А»</title>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Бюджет 5А — Администратор</title>
 <style>
-:root{--ink:#0b3557;--muted:#6c8297;--green:#12aa5b;--blue:#3976ef;--shadow:0 12px 32px rgba(29,74,113,.10)}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--ink);background:linear-gradient(150deg,#f7fbff,#fff 55%,#fff8f5);min-height:100vh}.app{max-width:940px;margin:auto;padding:28px 16px 80px}header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}h1{font-size:28px;margin:0}.sub{color:var(--muted);margin-top:5px;font-size:14px}.card{background:white;border:1px solid #e8eef4;border-radius:22px;box-shadow:var(--shadow);padding:20px}.notice{padding:14px 18px;background:#fff7e8;border:1px solid #f5e3bd;border-radius:15px;margin-bottom:20px;font-size:14px}.tabs{display:flex;gap:8px;overflow:auto;margin-bottom:20px}.tab{border:1px solid #e1e9f1;background:white;color:var(--ink);padding:12px 16px;border-radius:14px;font-weight:700;cursor:pointer;white-space:nowrap}.tab.active{background:var(--ink);color:white}.panel{display:none}.panel.active{display:block}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}.metric strong{display:block;font-size:25px;margin-top:8px}.muted{color:var(--muted)}h2{font-size:20px;margin:0 0 16px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}label{font-weight:700;font-size:14px}input{padding:12px 14px;border:1px solid #d8e3ec;border-radius:12px;font:inherit;max-width:100%}.btn{background:var(--green);color:white;border:0;border-radius:12px;padding:12px 17px;font:inherit;font-weight:800;cursor:pointer}.btn:disabled{opacity:.45;cursor:not-allowed}.placeholder{padding:26px;text-align:center;border:1px dashed #cedce7;border-radius:14px;color:var(--muted)}.link{color:var(--blue);text-decoration:none;font-weight:700}.small{font-size:13px}.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media(max-width:650px){.grid,.two{grid-template-columns:1fr}header{align-items:flex-start;flex-direction:column}h1{font-size:24px}}
-</style></head><body><main class="app"><header><div><h1>⚙️ Управление бюджетом</h1><div class="sub">5 «А» класс · Прототип административной панели</div></div><a class="link" href="./index.html">← На сайт класса</a></header>
-<div class="notice">🔒 <b>Демонстрационная версия.</b> Подключение к базе, сохранение изменений и просмотр квитанций отключены до настройки защищённого входа. Никакие реальные данные не загружаются.</div>
-<div class="grid"><div class="card metric"><span class="muted">Поступления</span><strong>—</strong><span class="small muted">Подключим к YDB</span></div><div class="card metric"><span class="muted">Расходы</span><strong>—</strong><span class="small muted">Подключим к YDB</span></div><div class="card metric"><span class="muted">Активные сборы</span><strong>—</strong><span class="small muted">Подключим к YDB</span></div></div>
-<nav class="tabs" aria-label="Разделы админки"><button class="tab active" data-tab="collections">🪙 Сборы</button><button class="tab" data-tab="payments">💳 Поступления</button><button class="tab" data-tab="expenses">🧾 Расходы</button><button class="tab" data-tab="reports">📊 Отчёты</button></nav>
-<section class="panel active" id="collections"><div class="two"><div class="card"><h2>Новый сбор</h2><div class="field"><label for="name">Название</label><input id="name" placeholder="Например, Экскурсия"></div><div class="field"><label for="amount">Сумма на ученика, ₽</label><input id="amount" type="number" min="0" step="0.01" placeholder="600"></div><button class="btn" disabled title="Появится после подключения защищённого API">Создать сбор</button><p class="small muted">Сохранение включим после авторизации и серверной проверки.</p></div><div class="card"><h2>Существующие сборы</h2><div class="placeholder">Список загрузится после подключения защищённого API.</div></div></div></section>
-<section class="panel" id="payments"><div class="card"><h2>Поступления и квитанции</h2><div class="placeholder">Здесь будут поиск по ученику, подтверждение оплаты и просмотр квитанций.</div></div></section>
-<section class="panel" id="expenses"><div class="card"><h2>Расходы</h2><div class="placeholder">Здесь появятся регистрация расходов, документы и история изменений.</div></div></section>
-<section class="panel" id="reports"><div class="card"><h2>Отчёты</h2><div class="placeholder">Здесь будут выгрузки по сборам и ученикам в Excel.</div></div></section>
-</main><script>document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===btn));document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===btn.dataset.tab));}));</script></body></html>
+:root{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#17253b;background:#f4f7fb}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1180px;margin:auto;padding:28px 20px}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}h1{font-size:26px;margin:0}h2{font-size:18px}.muted{color:#718097}.card{background:#fff;border:1px solid #e4eaf3;border-radius:18px;padding:22px;box-shadow:0 6px 24px #1c31500b}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.value{font-size:30px;font-weight:750;margin-top:10px}.green{color:#0e8d65}.blue{color:#245ac5}.nav{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0}.nav button{background:#eaf0f9;color:#34445c}.nav button.active{background:#245ac5;color:white}button{cursor:pointer;border:0;border-radius:10px;padding:11px 16px;font-weight:650;background:#245ac5;color:white}input{padding:12px;border:1px solid #d9e2ed;border-radius:10px;width:100%;font:inherit;margin:7px 0 15px}label{font-size:13px;color:#53647a}#login{max-width:410px;margin:11vh auto}.hidden{display:none!important}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:12px;border-bottom:1px solid #edf1f6;white-space:nowrap}th{color:#617189;font-weight:650;background:#f8fafd}#message{margin:14px 0;color:#b42318}.pill{background:#e9f4ed;color:#157347;border-radius:999px;padding:6px 10px;font-size:12px}.foot{font-size:12px;color:#7a8798;margin-top:22px}@media(max-width:700px){.grid{grid-template-columns:1fr}h1{font-size:21px}.wrap{padding:18px 12px}}
+
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}.toolbar input{max-width:350px;margin:0}.secondary{background:#eaf0f9;color:#24415e}.tablewrap{border:1px solid #e8edf5;border-radius:12px;overflow-x:auto}table{min-width:650px}th{font-size:12px;letter-spacing:.01em}td{vertical-align:middle;white-space:normal;min-width:85px}td.money{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:650}td.date{white-space:nowrap}td.description{min-width:220px;max-width:440px;line-height:1.45}td.id{font-variant-numeric:tabular-nums;color:#6e7e94;font-size:12px}td a{color:#245ac5;text-decoration:none;font-weight:650}td a:hover{text-decoration:underline}.status{display:inline-block;padding:5px 9px;border-radius:20px;background:#e9f6ef;color:#08784f;font-size:12px}.status.off{background:#f1f3f7;color:#6c788b}.summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.summary-item{background:#f8fafd;border:1px solid #edf1f6;border-radius:12px;padding:18px}.summary-item strong{display:block;font-size:22px;margin-top:8px}.empty{padding:24px;color:#718097;text-align:center}.count{font-size:13px;color:#718097;margin:0 0 12px}.nav button{font:inherit;font-size:14px;font-weight:650}.card h2{margin-top:0}@media(max-width:700px){.summary-grid{grid-template-columns:1fr}.toolbar input{max-width:none}.tablewrap table{min-width:580px}.card{padding:16px}}
+
+.receipt-button{display:inline-block;border:1px solid #cbdcf9;background:#edf4ff;border-radius:8px;padding:7px 10px;color:#245ac5!important;white-space:nowrap;font-size:12px}.table-total{padding:16px 14px;text-align:right;font-weight:750;border-top:1px solid #e8edf5;background:#f8fafd;font-variant-numeric:tabular-nums}td.description{max-width:350px}td{overflow-wrap:anywhere}
+
+.collection-actions{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}.small-button{padding:7px 11px;font-size:12px}.editor{margin:0 0 18px;padding:18px;background:#f8fafd;border:1px solid #dce5f2;border-radius:14px}.editor h3{margin:0 0 12px}.editor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.editor-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.editor input[type=checkbox]{width:auto;margin:8px}.editor .checkbox-label{display:flex;align-items:center;gap:6px}.success{color:#08784f!important}@media(max-width:700px){.editor-grid{grid-template-columns:1fr}.collection-actions{margin-left:0}}
+</style></head><body>
+<div id="login" class="card"><h1>Бюджет 5А</h1><p class="muted">Вход администратора</p><label>Адрес защищённого API</label><input id="api" value="https://d5d6v6f77mvr8kicluia.iwzqm34r.apigw.yandexcloud.net/api" placeholder="https://..." autocomplete="url"><label>Логин</label><input id="user" value="admin" autocomplete="username"><label>Пароль</label><input id="pass" type="password" autocomplete="current-password"><button id="enter">Войти</button><p id="loginError" class="muted"></p></div>
+<div id="app" class="wrap hidden"><header><div><h1>Бюджет 5А класса</h1><div class="muted">Панель администратора</div></div><button id="logout">Выйти</button></header><div class="grid"><div class="card"><div class="muted">Поступления</div><div class="value green" id="income">—</div></div><div class="card"><div class="muted">Расходы</div><div class="value" id="expenses">—</div></div><div class="card"><div class="muted">Остаток</div><div class="value blue" id="balance">—</div></div></div><div class="nav"><button data-view="collections" class="active">Сборы</button><button data-view="payments">Платежи</button><button data-view="expenses">Расходы</button><button data-view="summary">Сводка</button></div><div class="card"><h2 id="heading">Сборы</h2><div id="message"></div><div class="toolbar" id="toolbar"><input id="filter" placeholder="Поиск по текущему разделу"><button id="export" type="button" class="secondary">Скачать CSV</button><button id="refresh" type="button" class="secondary">Обновить</button><button id="addCollection" type="button" class="hidden">+ Добавить сбор</button></div><div id="editor" class="editor hidden"><h3 id="editorTitle">Новый сбор</h3><form id="collectionForm"><div class="editor-grid"><div><label for="cName">Название сбора *</label><input id="cName" maxlength="200" required></div><div><label for="cTarget">Плановая сумма, ₽ (необязательно)</label><input id="cTarget" inputmode="decimal" placeholder="Например, 15000,00"></div><div><label for="cOrder">Порядок отображения</label><input id="cOrder" type="number" min="0" max="4294967295" step="1" placeholder="Необязательно"></div><div><label class="checkbox-label" for="cActive"><input id="cActive" type="checkbox" checked> Сбор активен</label></div></div><div class="editor-actions"><button id="saveCollection" type="submit">Сохранить</button><button id="cancelCollection" type="button" class="secondary">Отмена</button><span id="editorError" role="alert"></span></div></form></div><div id="count" class="count"></div><div class="tablewrap" id="table"></div></div><p class="foot">Данные загружаются из YDB через защищённый API. Добавление и редактирование сборов доступно администратору. Платежи и расходы пока только для просмотра.</p></div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);let token='',api='',view='collections',currentRows=[],editingCollection=null;
+function formatMoney(x){return Number(x||0).toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2})+' ₽'}
+async function request(action,options={}){const url=new URL(api);url.searchParams.set('action',action);const r=await fetch(url,{...options,headers:{...(options.headers||{}),...(token?{'Authorization':'Bearer '+token}:{})}});const obj=await r.json();const data=typeof obj.body==='string'?JSON.parse(obj.body):obj;if(!r.ok||obj.statusCode>=400||!data.ok)throw new Error(data.error||'Ошибка запроса');return data}
+const names={
+ collection_id:'ID сбора',name:'Название',is_active:'Активность',sort_order:'Порядок',target_amount:'Плановая сумма',
+ answer_id:'ID платежа',payment_id:'ID платежа',amount:'Сумма',created_at:'Дата создания',
+ payment_date:'Дата платежа',expense_date:'Дата расхода',date:'Дата',description:'Описание',
+ student_name:'Ученик',payer_name:'Плательщик',comment:'Комментарий',status:'Статус',
+ expense_id:'ID расхода',purpose:'Назначение',receipt_url:'Чек',receipt:'Чек',
+ collection_name:'Сбор',collection:'Сбор',student:'Ученик',payer:'Плательщик'
+};
+const priorities={
+ collections:['name','target_amount','is_active','sort_order'],
+ payments:['payment_date','student_name','amount','purpose','comment','receipt_url'],
+ expenses:['expense_date','description','amount','purpose','receipt_url']
+};
+const studentKeys=['student_name','student','for_whom','paid_for','child_name','recipient_name','student_fio','fio','who_for'];
+const hiddenKeys=new Set(['answer_id','payment_id','expense_id','collection_id','created_at','updated_at','receipt_url','receipt','receipt_link','check_url','check_link']);
+const moneyFields=new Set(['amount','target_amount','total','income','expenses','balance']);
+const dateFields=new Set(['payment_date','expense_date','created_at','updated_at','date']);
+const idFields=new Set(['answer_id','payment_id','expense_id','collection_id']);
+function dateValue(v){
+ if(v===null||v===undefined||v==='')return '—';
+ const n=Number(v);
+ let d;
+ if(typeof v==='number'||(typeof v==='string'&&/^\d{4,18}$/.test(v))){
+   if(!Number.isFinite(n))return String(v);
+   if(n>1e14)d=new Date(Math.floor(n/1000)); // YDB Timestamp, microseconds
+   else if(n>1e11)d=new Date(n); // milliseconds
+   else if(n>1e9)d=new Date(n*1000); // seconds
+   else if(n>=10000&&n<200000)d=new Date(n*86400000); // YDB Date: days since 1970
+   else return String(v);
+ }else{
+   d=new Date(v);
+ }
+ return Number.isNaN(d.getTime())?String(v):d.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'});
+}
+function cellValue(key,value){
+ if(value===null||value===undefined||value==='')return '—';
+ if(key==='is_active')return value===true||value==='true'?'Активен':'Неактивен';
+ if(dateFields.has(key))return dateValue(value);
+ if(moneyFields.has(key))return formatMoney(value);
+ if(typeof value==='boolean')return value?'Да':'Нет';
+ return String(value);
+}
+function orderedKeys(rows){
+ const all=[...new Set(rows.flatMap(Object.keys))];
+ const pref=priorities[view]||[];
+ if(view==='payments')return ['payment_date','student_name','amount','purpose','comment','_receipt'].concat(all.filter(k=>!hiddenKeys.has(k)&&!pref.includes(k)&&!studentKeys.includes(k)&&!k.endsWith('_url')&&!['amount','purpose','comment'].includes(k)));
+ if(view==='expenses')return ['expense_date','description','amount','purpose','_receipt'].concat(all.filter(k=>!hiddenKeys.has(k)&&!pref.includes(k)&&!k.endsWith('_url')));
+ return [...pref.filter(k=>all.includes(k)&&!hiddenKeys.has(k)),...all.filter(k=>!pref.includes(k)&&!hiddenKeys.has(k)&&!k.endsWith('_url'))];
+}
+function receiptLink(item){
+ for(const k of ['receipt_url','receipt','receipt_link','check_url','check_link']){
+  const v=item[k];if(typeof v==='string'&&/^https:\/\//i.test(v))return v;
+ }
+ return '';
+}
+function studentName(item){
+ for(const k of studentKeys){const v=item[k];if(v!==null&&v!==undefined&&String(v).trim())return String(v)}
+ return '—';
+}
+function renderRows(){
+ const q=$('filter').value.toLocaleLowerCase('ru').trim();
+ const rows=currentRows.filter(item=>Object.values(item).some(v=>String(v??'').toLocaleLowerCase('ru').includes(q)));
+ $('count').textContent=`Записей: ${rows.length}${q?' (найдено из '+currentRows.length+')':''}`;
+ $('table').replaceChildren();
+ if(!rows.length){const p=document.createElement('div');p.className='empty';p.textContent=q?'Совпадений не найдено':'Нет записей';$('table').appendChild(p);return}
+ const keys=orderedKeys(currentRows),table=document.createElement('table'),thead=document.createElement('thead'),head=document.createElement('tr');
+ keys.forEach(k=>{const th=document.createElement('th');th.textContent=k==='student_name'?'За кого':k==='_receipt'?'Чек':(names[k]||k);head.appendChild(th)});
+ thead.appendChild(head);table.appendChild(thead);
+ const body=document.createElement('tbody');
+ rows.forEach(item=>{
+  const tr=document.createElement('tr');
+  keys.forEach(k=>{
+   const td=document.createElement('td'),v=k==='student_name'&&view==='payments'?studentName(item):item[k];
+   if(moneyFields.has(k))td.className='money';
+   else if(dateFields.has(k))td.className='date';
+   else if(idFields.has(k))td.className='id';
+   else if(['description','comment','purpose','name'].includes(k))td.className='description';
+   if(k==='_receipt'){const href=receiptLink(item);if(href){const a=document.createElement('a');a.href=href;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Открыть чек';a.className='receipt-button';td.appendChild(a)}else td.textContent='—';}
+   else if(k==='is_active'){
+    const pill=document.createElement('span');pill.className='status'+((v===true||v==='true')?'':' off');pill.textContent=cellValue(k,v);td.appendChild(pill);
+   }else if(k.endsWith('_url')&&typeof v==='string'&&/^https:\/\//i.test(v)){
+    const a=document.createElement('a');a.href=v;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Посмотреть чек';td.appendChild(a);
+   }else td.textContent=cellValue(k,v);
+   tr.appendChild(td);
+  });
+   if(view==='collections'){const td=document.createElement('td'),b=document.createElement('button');b.type='button';b.className='secondary small-button';b.textContent='Изменить';b.onclick=()=>openCollectionEditor(item);td.appendChild(b);tr.appendChild(td)}
+   body.appendChild(tr);
+ });
+ table.appendChild(body);$('table').appendChild(table);
+ if(['payments','expenses'].includes(view)){
+  const total=rows.reduce((sum,item)=>sum+(Number(item.amount)||0),0);
+  const foot=document.createElement('div');foot.className='table-total';
+  foot.textContent='Итого'+(q?' по найденным записям':'')+': '+formatMoney(total);
+  $('table').appendChild(foot);
+ }
+
+}
+async function show(name){
+ view=name;document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));
+ $('message').textContent='';$('message').classList.remove('success');$('heading').textContent=({collections:'Сборы',payments:'Платежи',expenses:'Расходы',summary:'Сводка'})[name];
+ $('table').textContent='Загрузка…';$('count').textContent='';$('filter').value='';
+ $('toolbar').classList.toggle('hidden',name==='summary');
+ $('addCollection').classList.toggle('hidden',name!=='collections');
+ if(name!=='collections')closeCollectionEditor();
+ try{
+  const data=await request(name);
+  if(name==='summary'){
+   currentRows=[];const wrap=document.createElement('div');wrap.className='summary-grid';
+   [['Поступления',formatMoney(data.income)],['Расходы',formatMoney(data.expenses)],['Остаток',formatMoney(data.balance)],['Количество платежей',data.payments_count],['Количество расходов',data.expenses_count]].forEach(([label,value])=>{
+    const div=document.createElement('div');div.className='summary-item';const caption=document.createElement('div');caption.className='muted';caption.textContent=label;const strong=document.createElement('strong');strong.textContent=value;div.append(caption,strong);wrap.appendChild(div);
+   });
+   $('table').replaceChildren(wrap);$('table').style.border='0';
+   $('income').textContent=formatMoney(data.income);$('expenses').textContent=formatMoney(data.expenses);$('balance').textContent=formatMoney(data.balance);return;
+  }
+  $('table').style.border='';currentRows=data.items||[];renderRows();
+ }catch(e){$('table').replaceChildren();$('message').textContent=e.message}
+}
+function closeCollectionEditor(){editingCollection=null;$('editor').classList.add('hidden');$('editorError').textContent='';$('collectionForm').reset()}
+function openCollectionEditor(item=null){
+ editingCollection=item;$('editor').classList.remove('hidden');$('editorTitle').textContent=item?'Редактирование сбора':'Новый сбор';
+ $('cName').value=item?.name??'';$('cTarget').value=item?.target_amount??'';$('cOrder').value=item?.sort_order??'';$('cActive').checked=item?(item.is_active===true||item.is_active==='true'):true;
+ $('editorError').textContent='';$('editor').scrollIntoView({behavior:'smooth',block:'nearest'});$('cName').focus();
+}
+$('addCollection').onclick=()=>openCollectionEditor();$('cancelCollection').onclick=closeCollectionEditor;
+$('collectionForm').onsubmit=async event=>{
+ event.preventDefault();$('editorError').textContent='';const save=$('saveCollection');
+ try{
+  const name=$('cName').value.trim();if(!name||name.length>200)throw new Error('Введите название сбора');
+  const raw=$('cTarget').value.trim().replace(/\s/g,'').replace(',','.');
+  if(raw&&!/^(?:\d+)(?:\.\d{1,2})?$/.test(raw))throw new Error('Сумма должна содержать не более двух знаков после запятой');
+  const orderRaw=$('cOrder').value.trim();const order=orderRaw===''?null:Number(orderRaw);
+  if(order!==null&&(!Number.isSafeInteger(order)||order<0||order>4294967295))throw new Error('Неверный порядок отображения');
+  const payload={name,target_amount:raw||null,sort_order:order,is_active:$('cActive').checked};
+  if(editingCollection)payload.collection_id=Number(editingCollection.collection_id);
+  save.disabled=true;const action=editingCollection?'collection_update':'collection_create';
+  await request(action,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  closeCollectionEditor();await show('collections');$('message').textContent='Сбор успешно сохранён';$('message').classList.add('success');
+ }catch(e){$('editorError').textContent=e.message;$('editorError').style.color='#b42318'}finally{save.disabled=false}
+};
+$('filter').addEventListener('input' ,()=>{if(view!=='summary')renderRows()});
+$('refresh').onclick=()=>show(view);
+$('export').onclick=()=>{if(!currentRows.length)return;const keys=orderedKeys(currentRows);const csv=[keys.map(k=>names[k]||k),...currentRows.map(r=>keys.map(k=>cellValue(k,r[k]))) ].map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');const blob=new Blob(['\ufeff',csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='budget-5a-'+view+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+$('enter').onclick=async()=>{try{api=$('api').value.trim();if(!api.startsWith('https://'))throw new Error('Укажите HTTPS-адрес API');const url=new URL(api);url.searchParams.set('action','login');const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({login:$('user').value,password:$('pass').value})});const obj=await r.json();const data=typeof obj.body==='string'?JSON.parse(obj.body):obj;if(!r.ok||obj.statusCode>=400||!data.ok)throw new Error('Неверный логин или пароль либо API недоступен');token=data.token;$('pass').value='';$('login').classList.add('hidden');$('app').classList.remove('hidden');const s=await request('summary');$('income').textContent=formatMoney(s.income);$('expenses').textContent=formatMoney(s.expenses);$('balance').textContent=formatMoney(s.balance);await show('collections')}catch(e){$('loginError').textContent=e.message}};
+$('logout').onclick=()=>{token='';currentRows=[];$('app').classList.add('hidden');$('login').classList.remove('hidden')};document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>show(b.dataset.view));
+</script></body></html>
